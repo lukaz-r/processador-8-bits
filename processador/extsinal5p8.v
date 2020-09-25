@@ -1,11 +1,11 @@
 module extsinal2p8(
-    input[1:0] entrada,
+    input[4:0] entrada,
     output[7:0] saida
 );
 
 function [7:0] ext;
     
-    input[1:0] entrada;
+    input[4:0] entrada;
 
     if(entrada[0] == 0)
         ext = {6'b000000, entrada};
