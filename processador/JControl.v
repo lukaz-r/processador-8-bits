@@ -1,4 +1,4 @@
-module moduloA(
+module JControl(
     input jump,
     input jumpC,
     input beq,
