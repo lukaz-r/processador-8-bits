@@ -1,9 +1,10 @@
 
-module ALU(
+module ALU( //main ALU
     input[7:0] entrada1,
     input[7:0] entrada2,
     input[2:0] sinal_ula,
-    output[7:0] saida_ula
+    output[7:0] saida_ula,
+    output zero
 );
 
 function[7:0] alu;
@@ -46,5 +47,10 @@ function[7:0] alu;
 endfunction
 
 assign out = alu(entrada1, entrada2, sinal_ula);
+if (out == 0)
+    zero = 1;
+else
+    zero = 0;
+end
 
 endmodule

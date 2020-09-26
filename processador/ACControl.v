@@ -1,15 +1,16 @@
-module ACControl(
+module accontrol( //Main ULA input accumulator control unit
     input jump,
     input jumpC,
     input sin,
+    input InA,
     input twone,
-    output reg saidaMux,
-    output reg saidaAc
+    output saidaMux,
+    output saidaAc
 );
 
     always @(*)
         begin
-            saidaMux = twone;
-            saidaAC = ~(jump | jumpC) & (Sin | twone);
+            assign saidaMux = twone & ~InA;
+            assign saidaAC = ~(jump | jumpC) & (Sin | twone);
         end
 endmodule

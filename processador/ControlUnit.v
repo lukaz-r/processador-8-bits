@@ -1,7 +1,8 @@
-module ControlUnit(
+module controlunit(
     input[2:0] OPCode,
     output J,
     output JC,
+    output INA,
     output RM,
     output WM,
     output SIN,
@@ -12,6 +13,7 @@ module ControlUnit(
 
 assign J = 0;
 assign JC = 0;
+assign INA = 0;
 assign RM = 0;
 assign WM = 0;
 assign SIN = 0;
@@ -27,7 +29,7 @@ function decode;
 
         3'b001: // MFI
             assign SIN = 1;
-            // PROBLEMA AQUI COM O MUX
+            assign INA = 1;
 
         3'b010: // MW
             assign WM = 1;
