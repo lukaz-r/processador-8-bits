@@ -12,4 +12,5 @@ always@(*)
         else
             data <= data;
     end
+    
 endmodule

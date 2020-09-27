@@ -5,9 +5,10 @@ module zero ( //Zero reg output from the main ALU
 );
 
 always@(*)
-    if (accept == 1)
-        val <= newVal;
-    else
-        val <= val;
+    begin
+        if (accept == 1)
+            val <= newVal;
+        else
+            val <= val;
     end
 endmodule

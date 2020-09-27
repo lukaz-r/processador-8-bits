@@ -13,19 +13,19 @@ initial begin
     $dumpfile ("testbench/acIn_tb.vcd");    
 	$dumpvars(0, acIn_tb);
 
-    newData = 7'b0000001;
+    newData = 8'b00000001;
     accept = 1'b1;
     #20;
 
-    newData = 7'b0000010;
+    newData = 8'b00000010;
     accept = 1'b0;
     #20;
 
-    newData = 7'b0000100;
+    newData = 8'b00000100;
     accept = 1'b1;
     #20;
 
-    newData = 7'b0000101;
+    newData = 8'b00000101;
     accept = 1'b1;
     #20;
 
