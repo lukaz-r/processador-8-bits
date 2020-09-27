@@ -1,15 +1,18 @@
 module controlunit(
-    input[2:0] OPCode,
-    output reg J,
-    output reg JC,
-    output reg INA,
-    output reg RM,
-    output reg WM,
-    output reg SIN,
-    output reg SOUT,
-    output reg WR,
-    output reg NEQ
+    OPCode,
+    J,
+    JC,
+    INA,
+    RM,
+    WM,
+    SIN,
+    SOUT,
+    WR,
+    NEQ,
 );
+
+input[2:0] OPCode;
+output reg J, JC, INA, RM, WM, SIN, SOUT, WR, NEQ;
 
 
 always @(OPCode)
@@ -58,7 +61,6 @@ begin
 
         3'b011: // MR
         begin
-
             J = 1'b0;
             JC = 1'b0;
             INA = 1'b0;
@@ -124,6 +126,5 @@ begin
             
     endcase
 end
-
 
 endmodule

@@ -1,5 +1,6 @@
 `timescale 1ns/1ns
-`include "../processador/ACControl.v"
+`include "processador/ACControl.v"
+
 
 module ACControl_tb;
     reg jump, jumpC, sin, InA, twone;
@@ -16,7 +17,9 @@ module ACControl_tb;
     );
 
     initial begin
-        $monitor("J = %b, Jc = %b, Sin = %b, InA = %b, 1&2 = %b, Mux = %b, AC = %b", jump,jumpC,sin,InA,twone,saidaMux,saidaAc);
+        //$monitor("J = %b, Jc = %b, Sin = %b, InA = %b, 1&2 = %b, Mux = %b, AC = %b", jump,jumpC,sin,InA,twone,saidaMux,saidaAc);
+        $dumpfile ("testbench/ACControl.vcd");    
+	    $dumpvars(0, ACControl_tb);
 
         jump = 0;
         jumpC = 0;
@@ -80,9 +83,8 @@ module ACControl_tb;
         InA = 1;
         twone = 0;
 
-        
-
-        $monitor("test completed");
+        //$monitor("test completed");
+        $display("test completed");
     end
 
 endmodule
