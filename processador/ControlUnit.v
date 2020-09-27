@@ -16,7 +16,7 @@ output reg J, JC, INA, RM, WM, SIN, SOUT, WR, NEQ;
 
 
 always @(OPCode)
-begin
+
 
     case(OPCode)
 
@@ -125,6 +125,6 @@ begin
             end
             
     endcase
-end
+
 
 endmodule
