@@ -1,0 +1,41 @@
+$date
+	Sun Sep 27 12:57:47 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module pc_tb $end
+$var wire 8 ! endAtual [7:0] $end
+$var reg 8 " novoEnd [7:0] $end
+$scope module uut $end
+$var wire 8 # novoEnd [7:0] $end
+$var reg 8 $ endAtual [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx $
+bx #
+bx "
+bx !
+$end
+#20
+b10 !
+b10 $
+b10 "
+b10 #
+#40
+b11 !
+b11 $
+b11 "
+b11 #
+#60
+b100 !
+b100 $
+b100 "
+b100 #
+#80

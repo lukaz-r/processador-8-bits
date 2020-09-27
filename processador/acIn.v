@@ -7,7 +7,7 @@ module acIn ( //Main ALU input accumulator
 always@(*)
 
     begin
-        if (accept == 1)
+        if (accept == 1'b1)
             data <= newData;
         else
             data <= data;

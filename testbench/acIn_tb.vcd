@@ -1,0 +1,44 @@
+$date
+	Sun Sep 27 14:21:56 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module acIn_tb $end
+$var wire 8 ! data [7:0] $end
+$var reg 1 " accept $end
+$var reg 8 # newData [7:0] $end
+$scope module uut $end
+$var wire 1 " accept $end
+$var wire 8 $ newData [7:0] $end
+$var reg 8 % data [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 %
+b1 $
+b1 #
+1"
+b1 !
+$end
+#20
+0"
+b10 #
+b10 $
+#40
+b100 !
+b100 %
+1"
+b100 #
+b100 $
+#60
+b101 !
+b101 %
+b101 #
+b101 $
+#80
