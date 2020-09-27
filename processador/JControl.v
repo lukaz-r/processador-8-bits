@@ -7,7 +7,9 @@ module jcontrol(
 );
 
     always @(*)
+
         begin
            saidaA = (jump) | ((jumpC) & ((zero & ~beq ) | (beq & ~zero)));
         end
+        
 endmodule

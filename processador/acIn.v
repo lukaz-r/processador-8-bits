@@ -1,14 +1,15 @@
 module acIn ( //Main ALU input accumulator
     input[7:0] newData,
     input accept,
-    output reg[7:0] Data
+    output reg[7:0] data
 );
 
 always@(*)
-    if (accept == 1)
-        Data <= newData;
-    else
-        Data <= Data;
-    end
 
+    begin
+        if (accept == 1)
+            data <= newData;
+        else
+            data <= data;
+    end
 endmodule

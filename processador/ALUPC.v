@@ -1,7 +1,7 @@
 
 module ALUPC( //Summation of PC and 1
-    input[7:0] inPC
-    output[7:0] out,
+    input[7:0] inPC,
+    output reg[7:0] out
 );
 
 always@(*)
