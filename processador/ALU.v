@@ -1,21 +1,23 @@
 
 module ALU( //main ALU
-    input[7:0] entrada1,
-    input[7:0] entrada2,
-    input[2:0] sinal_ula,
-    output reg[7:0] saida_ula,
-    output reg zero
+    entrada1,
+    entrada2,
+    sinal_ula,
+    saida_ula,
+    zero,
 );
 
+input[7:0] entrada1;
+input[7:0] entrada2;
+input[2:0] sinal_ula;
+output wire[7:0] saida_ula;
+output wire zero;
+
+reg[7:0] ulaOut;
+reg zeroOut;
+
 function[7:0] alu;
-
-    // Rever
-    input[7:0] entrada1;
-    input[7:0] entrada2;
-    input[2:0] sinal_ula;
-
     case(sinal_ula)
-
         3'b000: // and
             alu = entrada1 & entrada2;
 
@@ -42,14 +44,14 @@ function[7:0] alu;
     endcase
 
 endfunction
+ assign saida_ula = alu(entrada1, entrada2, sinal_ula);
 
-assign out = alu(entrada1, entrada2, sinal_ula);
+if (saida_ula == 0) begin
+    assign zeroOut = 1;
+end else begin
+    assign zeroOut = 0;
+end
 
-    // begin
-    //     if (out == 0)
-    //         zero = 1;
-    //     else
-    //         zero = 0;
-    // end
+assign zero = zeroOut;
 
 endmodule
