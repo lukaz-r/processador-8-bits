@@ -5,7 +5,6 @@ module acOut ( //Main ALU output accumulator
 );
 
 always@(*)
-
     begin
         if (accept == 1'b1)
             data <= newData;
