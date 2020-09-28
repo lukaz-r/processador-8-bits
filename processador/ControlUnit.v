@@ -1,4 +1,4 @@
-module controlunit(
+module controlUnit(
     OPCode,
     J,
     JC,
@@ -16,7 +16,6 @@ output reg J, JC, INA, RM, WM, SIN, SOUT, WR, NEQ;
 
 
 always @(OPCode)
-
 
     case(OPCode)
 

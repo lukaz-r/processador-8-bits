@@ -1,0 +1,49 @@
+$date
+	Sun Sep 27 21:46:49 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module controlUnit_tb $end
+$var wire 1 ! WR $end
+$var wire 1 " WM $end
+$var wire 1 # SOUT $end
+$var wire 1 $ SIN $end
+$var wire 1 % RM $end
+$var wire 1 & NEQ $end
+$var wire 1 ' JC $end
+$var wire 1 ( J $end
+$var wire 1 ) INA $end
+$var reg 3 * OPCode [2:0] $end
+$scope module ctrl $end
+$var wire 3 + OPCode [2:0] $end
+$var reg 1 ) INA $end
+$var reg 1 ( J $end
+$var reg 1 ' JC $end
+$var reg 1 & NEQ $end
+$var reg 1 % RM $end
+$var reg 1 $ SIN $end
+$var reg 1 # SOUT $end
+$var reg 1 " WM $end
+$var reg 1 ! WR $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 +
+b0 *
+0)
+0(
+0'
+0&
+0%
+0$
+1#
+0"
+0!
+$end
+#20
