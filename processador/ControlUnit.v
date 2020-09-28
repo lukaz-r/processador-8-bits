@@ -12,11 +12,11 @@ module controlUnit(
 );
 
 input[2:0] OPCode;
-output reg J, JC, INA, RM, WM, SIN, SOUT, WR, NEQ;
+output wire J, JC, INA, RM, WM, SIN, SOUT, WR, NEQ;
+output reg Jaux, JCaux, INAaux, RMaux, WMaux, SINaux, SOUTaux, WRaux, NEQaux;
 
 
 always @(OPCode)
-
     case(OPCode)
 
         3'b000: // R

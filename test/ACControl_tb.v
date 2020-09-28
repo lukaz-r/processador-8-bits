@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-`include "processador/ACControl.v"
+`include "../processador/ACControl.v"
 
 
 module ACControl_tb;

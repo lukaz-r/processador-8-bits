@@ -4,8 +4,6 @@ module pc (
 );
 
 always@(*)
-
-    endAtual <= novoEnd;
-
+    endAtual = novoEnd;
 endmodule
 

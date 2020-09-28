@@ -1,14 +1,14 @@
 `timescale 1ns/1ns
-`include "../processador/main.v"
+`include "../processador/mac.v"
 
 
-module main_tb;
+module mac_tb;
     reg [7:0]inReg; 
     reg [7:0]ini; 
     reg choice;
     wire[7:0] out;
 
-    main mux( 
+    mac mux( 
         inReg,
         ini,
         choice,

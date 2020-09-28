@@ -1,5 +1,5 @@
 
-module main( //Mux of main ALU output accumulator data source
+module mac( //Mux of main ALU output accumulator data source
     inReg,
     ini,
     choice,

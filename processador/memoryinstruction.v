@@ -4,7 +4,7 @@ module memoryinstruction1(
     output [3:0] saidacontrolunit;
     output [1:0] saidaRs;
     output [4:0] saidaextendsinal;
-    reg [7:0] armazenarinstrucoes [10:0];
+    reg [7:0] armazenarinstrucoes [256:0];
     output [7:0] saidaInstrucao;
 
 always @(posedge clock)begin
