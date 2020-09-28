@@ -8,7 +8,7 @@ module regBank_tb;
     reg [7:0]data; 
     wire[7:0]regVal;
 
-    regbank rb( //Register bank
+    regBank rb( //Register bank
         WR,
         rs,
         data,
