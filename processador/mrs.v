@@ -1,4 +1,3 @@
-
 module mrs( //Mux Register Source
     inAc,
     inMem,
