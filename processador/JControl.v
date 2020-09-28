@@ -6,13 +6,9 @@ module jcontrol(
     saidaA
 );
 input jump, jumpC, neq, zero;
-output wire saidaA;
-reg aux;
+output reg saidaA;
 
-    always @(*)
-        begin
-           aux = (jump) | ((jumpC) & ((zero & ~neq ) | (neq & ~zero)));
-        end
-    assign saidaA = aux;
-        
+always @(*)
+    saidaA = (jump) | ((jumpC) & ((zero & ~neq ) | (neq & ~zero)));
+    
 endmodule

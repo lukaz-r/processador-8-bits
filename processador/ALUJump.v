@@ -6,10 +6,8 @@ module ALUJump( //Summation of PC and Jump addr
 );
 input[7:0] inPC;
 input[7:0] ini;
-output wire[7:0] out;
-reg[7:0] aux;
+output reg[7:0] out;
 
 always@(*)
-    assign aux = inPC + ini;
-assign out = aux;
+    out = inPC + ini;
 endmodule

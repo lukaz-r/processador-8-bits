@@ -1,19 +1,19 @@
 module extsinal5p8(
-    input[4:0] entrada,
-    output[7:0] saida
+    entrada,
+    saida
 );
 
-function [7:0] ext;
-    
-    input[4:0] entrada;
+input[4:0] entrada;
+output reg[7:0] saida;
 
-    if(entrada[0] == 0)
-        ext = {8'b00000000, entrada};
-    else if(entrada[0] == 1)
-        ext = {8'b11111111, entrada};
-
-endfunction
-
-assign saida = ext(entrada);
+always@(*)
+    begin
+        if(entrada[0] == 0) begin
+            saida[7:5] = 3'b000;
+        end else if(entrada[0] == 1) begin
+            saida[7:5] = 3'b111;
+        end
+        saida[4:0] = entrada;
+    end
 
 endmodule

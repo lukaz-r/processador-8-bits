@@ -1,0 +1,68 @@
+#! /usr/local/iverilog/bin/vvp
+:ivl_version "11.0 (devel)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "E:\iverilog\lib\ivl\system.vpi";
+:vpi_module "E:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "E:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "E:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "E:\iverilog\lib\ivl\va_math.vpi";
+S_0000000000d661a0 .scope module, "mpc_tb" "mpc_tb" 2 5;
+ .timescale -9 -9;
+v0000000000ef9f60_0 .var "choice", 0 0;
+v0000000000efa000_0 .net "out", 7 0, v0000000000ef9d80_0;  1 drivers
+v0000000000efa0a0_0 .var "pcj", 7 0;
+v0000000000efa140_0 .var "pcp", 7 0;
+S_0000000000d66330 .scope module, "mux" "mpc" 2 11, 3 2 0, S_0000000000d661a0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 8 "pcp";
+    .port_info 1 /INPUT 8 "pcj";
+    .port_info 2 /INPUT 1 "choice";
+    .port_info 3 /OUTPUT 8 "out";
+v0000000000d32780_0 .net "choice", 0 0, v0000000000ef9f60_0;  1 drivers
+v0000000000ef9d80_0 .var "out", 7 0;
+v0000000000ef9e20_0 .net "pcj", 7 0, v0000000000efa0a0_0;  1 drivers
+v0000000000ef9ec0_0 .net "pcp", 7 0, v0000000000efa140_0;  1 drivers
+E_0000000000efc630 .event edge, v0000000000d32780_0, v0000000000ef9e20_0, v0000000000ef9ec0_0;
+    .scope S_0000000000d66330;
+T_0 ;
+    %wait E_0000000000efc630;
+    %load/vec4 v0000000000d32780_0;
+    %pad/u 32;
+    %cmpi/e 1, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %load/vec4 v0000000000ef9e20_0;
+    %assign/vec4 v0000000000ef9d80_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0000000000ef9ec0_0;
+    %assign/vec4 v0000000000ef9d80_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0000000000d661a0;
+T_1 ;
+    %vpi_call 2 19 "$monitor", "PCp = %d, PCJ = %d, choice = %b, out = %d", v0000000000efa140_0, v0000000000efa0a0_0, v0000000000ef9f60_0, v0000000000efa000_0 {0 0 0};
+    %pushi/vec4 2, 0, 8;
+    %store/vec4 v0000000000efa140_0, 0, 8;
+    %pushi/vec4 124, 0, 8;
+    %store/vec4 v0000000000efa0a0_0, 0, 8;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000000000ef9f60_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 14, 0, 8;
+    %store/vec4 v0000000000efa140_0, 0, 8;
+    %pushi/vec4 124, 0, 8;
+    %store/vec4 v0000000000efa0a0_0, 0, 8;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000000ef9f60_0, 0, 1;
+    %delay 20, 0;
+    %vpi_call 2 34 "$monitor", "test completed" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "mpc_tb.v";
+    "./../processador/mpc.v";

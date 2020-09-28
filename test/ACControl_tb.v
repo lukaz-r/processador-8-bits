@@ -17,9 +17,9 @@ module ACControl_tb;
     );
 
     initial begin
-        //$monitor("J = %b, Jc = %b, Sin = %b, InA = %b, 1&2 = %b, Mux = %b, AC = %b", jump,jumpC,sin,InA,twone,saidaMux,saidaAc);
-        $dumpfile ("testbench/ACControl.vcd");    
-	    $dumpvars(0, ACControl_tb);
+        $monitor("J = %b, Jc = %b, Sin = %b, InA = %b, 1&2 = %b, Mux = %b, AC = %b", jump,jumpC,sin,InA,twone,saidaMux,saidaAc);
+        //$dumpfile ("testbench/ACControl.vcd");    
+	    //$dumpvars(0, ACControl_tb);
 
         jump = 0;
         jumpC = 0;

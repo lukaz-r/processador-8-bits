@@ -8,16 +8,13 @@ module mpc( //Mux of PC source
     input[7:0] pcp; //PC plus
     input[7:0] pcj; //Jump
     input choice;
-    output wire[7:0] out;
-    reg[7:0] aux;
+    output reg[7:0] out;
 
 always@(*)
     if (choice == 1) begin
-        aux <= pcj;
+        out <= pcj;
     end else begin
-        aux <= pcp;
+        out <= pcp;
     end
-
-assign out = aux;
     
 endmodule

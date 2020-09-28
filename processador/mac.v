@@ -8,16 +8,13 @@ module mac( //Mux of main ALU output accumulator data source
     input[7:0] inReg;
     input[7:0] ini;
     input choice;
-    output wire[7:0] out;
-    reg[7:0] aux;
+    output reg[7:0] out;
 
 always@(*)
     if (choice == 1) begin
-        aux <= inReg;
+        out <= inReg;
     end else begin
-        aux <= ini;
+        out <= ini;
     end
-
-assign out = aux;
     
 endmodule

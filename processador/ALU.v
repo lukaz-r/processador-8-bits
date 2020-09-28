@@ -9,9 +9,8 @@ module ALU(
     input[7:0] entrada2;
     input[2:0] sinal_ula;
     
-    output wire[7:0] saida_ula;
-    output wire[0:0] zero;
-    reg aux;
+    output reg[7:0] saida_ula;
+    output reg[0:0] zero;
 
  
 function[7:0] alu;
@@ -48,14 +47,15 @@ function[7:0] alu;
 
 endfunction
 
-assign saida_ula = alu(entrada1, entrada2, sinal_ula);
 
-always @(*)
-    if (saida_ula == 0) begin
-        aux = 1;
-    end else begin
-        aux = 0;
+
+always @(*) 
+    begin
+        saida_ula = alu(entrada1, entrada2, sinal_ula);
+        if (saida_ula == 0) begin
+            zero = 1;
+        end else begin
+            zero = 0;
+        end
     end
-assign zero = aux;
-
 endmodule
