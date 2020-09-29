@@ -1,19 +1,18 @@
 module acIn ( //Main ALU input accumulator
     newData,
     accept,
-    data
+    data,
+    clock
 );
     input[7:0] newData;
-    input accept;
+    input accept, clock;
     output reg[7:0] data;
 
-always@(*)
+always @(posedge clock) begin
+    if (accept == 1'b1)
+        data <= newData;
+    else
+        data <= data;
+end
 
-    begin
-        if (accept == 1'b1)
-            data <= newData;
-        else
-            data <= data;
-    end
-    
 endmodule

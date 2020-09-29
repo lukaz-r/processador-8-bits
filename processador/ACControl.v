@@ -1,4 +1,4 @@
-module accontrol( //Main ULA input accumulator control unit
+module ACControl( //Main ULA input accumulator control unit
     jump,
     jumpC,
     sin,
