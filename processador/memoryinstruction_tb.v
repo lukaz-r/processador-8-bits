@@ -8,11 +8,7 @@ module memoryinstruction_tb ();
     wire [4:0]Four_Zero_Bits; 
 
     memoryinstruction_ t01 (.PCinst(PCinst), .OPCode(OPCode), .Rs(Rs),.Four_Zero_Bits(Four_Zero_Bits));
-     initial begin
-        #5 clock = 0;
-     end
-        #5 clock = 1;
-    always #5 clock = ~clock; // 10ns periodo de clock
+
     initial begin
         $dumpfile("memoryinstruction_tb.vcd");
         $dumpvars(0,memoryinstruction_tb);
