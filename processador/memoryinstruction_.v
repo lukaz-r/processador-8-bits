@@ -1,6 +1,5 @@
-module memoryinstruction_ (clock,PCinst, OPCode, Rs, Four_Zero_Bits);
+module memoryinstruction_ (PCinst, OPCode, Rs, Four_Zero_Bits);
 
-    input clock;
     input [7:0]PCinst;                  // Instrução recebida 
     output reg [2:0]OPCode;             // Valor do OPCode da Instrução
     output reg [1:0]Rs;                 // Valor do Rs da Instrução
@@ -8,7 +7,7 @@ module memoryinstruction_ (clock,PCinst, OPCode, Rs, Four_Zero_Bits);
 
     reg [7:0]PCdata;
 
-    always@(posedge clock)begin
+    always@(*)begin
         PCdata         = PCinst;
         OPCode         = PCdata[7:5];
         Rs             = PCdata[4:3];
