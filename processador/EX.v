@@ -73,6 +73,7 @@ ALU ALUMAIN(
     .entrada1(regVal),
     .entrada2(acInValue),
     .sinal_ula(sinal_ula),
+    .clock(clock),
     .saida_ula(ulaOut),
     .zero(ulaZero)
 );

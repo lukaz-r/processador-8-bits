@@ -2,12 +2,14 @@ module ALU(
     entrada1,
     entrada2,
     sinal_ula,
+    clock,
     saida_ula,
     zero
 );
     input[7:0] entrada1;
     input[7:0] entrada2;
     input[2:0] sinal_ula;
+    input clock;
     
     output reg[7:0] saida_ula;
     output reg[0:0] zero;
@@ -49,7 +51,7 @@ endfunction
 
 
 
-always @(*) 
+always @(negedge clock) 
     begin
         saida_ula = alu(entrada1, entrada2, sinal_ula);
         if (saida_ula == 0) begin
