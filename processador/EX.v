@@ -94,7 +94,8 @@ acOut ACOUT( //Main ALU output accumulator
 
 ALUJump ALUJUMP( //Summation of PC and Jump addr
     .inPC(PC),
-    .ini(acInValue),
+    .ini(sinalExt),
+    .clock(clock),
     .out(ulaJumpOut)
 );
 

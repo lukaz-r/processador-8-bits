@@ -32,8 +32,9 @@ module EX_tb;
     end
 
     initial begin
-        $monitor("CLOCK = %b; OUTPUTS: ZeroOut = %b, AcOut = %d, ULAJump = %d, rs = %d\n WR = %b, WM = %b, RM = %b, NEQ = %b, J = %b, JC = %b", clock, zeroOut, acOutValue, ulaJumpOut, rs, WRMem, WMMem, RMMem, NEQMem, JMem, JCMem);
-        
+        $monitor("CLOCK = %b; OUTPUTS: ZeroOut = %b, AcOut = %d, ULAJump = %d, rs = %d\n WR = %b, WM = %b, RM = %b, NEQ = %b, J = %b, JC = %b\n", clock, zeroOut, acOutValue, ulaJumpOut, rs, WRMem, WMMem, RMMem, NEQMem, JMem, JCMem);
+        clock = 1'b1;
+
         WR = 0; 
         SOUT = 0;
         WM = 0;
@@ -49,7 +50,7 @@ module EX_tb;
         sinalExt = 8'b00011111;
         funct = 111;
         
-        clock = 1'b0;
+        
 
         #10
         WR = 0; 

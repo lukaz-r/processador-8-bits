@@ -5,7 +5,7 @@ module zero ( //Zero reg output from the main ALU
     input clock
 );
 
-always @(posedge clock)
+always @(negedge clock)
     begin
         if (accept == 1)
             val <= newVal;
