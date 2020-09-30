@@ -2,11 +2,13 @@ module regBank ( //Register bank
     WR,
     clock,
     rs,
+    rd,
     data,
     regVal
 );
 
 input WR, clock;
+input[1:0] rd;
 input[1:0] rs;
 input[7:0] data;
 output reg[7:0] regVal;
@@ -18,7 +20,7 @@ reg [7:0] t1; //11
 
 always @(posedge clock) begin
     if (WR == 1) begin
-        case(rs)
+        case(rd)
             2'b00:
                 s0 = data;
             2'b01:

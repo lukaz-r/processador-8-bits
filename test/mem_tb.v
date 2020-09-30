@@ -1,7 +1,7 @@
-`include "../processador/mem.v"
+`include "../processador/MEM.v"
 `timescale 1ns/1ns
 
-module mem_tb ();
+module MEM_tb ();
     reg Wr, Wm, Rm, Neq, J, JC;
     reg zeroOut, clock;
     reg [7:0]PC;
@@ -16,7 +16,7 @@ module mem_tb ();
 //       #5 clock <= ~clock;
 //    end
 
-    mem exec (
+    MEM exec (
         .clock(clock),
         .Wr(Wr), .Wm(Wm), .Rm(Rm), .Neq(Neq), .J(J), .JC(JC),
         .PC(PC),

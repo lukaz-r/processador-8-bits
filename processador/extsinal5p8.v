@@ -8,11 +8,7 @@ output reg[7:0] saida;
 
 always@(*)
     begin
-        if(entrada[0] == 0) begin
-            saida[7:5] = 3'b000;
-        end else if(entrada[0] == 1) begin
-            saida[7:5] = 3'b111;
-        end
+        saida[7:5] = 3'b000;
         saida[4:0] = entrada;
     end
 

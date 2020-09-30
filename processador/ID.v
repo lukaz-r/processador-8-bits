@@ -11,6 +11,7 @@ module ID(
     regVal,
     extsinal,
     funct,
+    rd,
     J, JC, INA, RM, WM, SIN, SOUT, WROut, NEQ,
     PCout
 );
@@ -19,11 +20,10 @@ module ID(
     input[7:0] inst;
     input[7:0] data;
     input WR, clock;
-
-    reg[2:0] OPCode;
-
+    
     output wire[7:0] regVal;
     output wire[7:0] extsinal;
+    output reg [1:0] rd;
     output wire J, JC, INA, RM, WM, SIN, SOUT, WROut, NEQ;
     
     output reg[2:0] funct;
@@ -33,6 +33,7 @@ module ID(
         .WR(WR),
         .clock(clock),
         .rs(inst[4:3]),
+        .rd(rd),
         .data(data),
         .regVal(regVal)
     );
@@ -56,6 +57,7 @@ module ID(
     );
 
     always @(*) begin
+        rdOut = inst[4:3];
         funct = inst[2:0];
         PCout = PC;
     end

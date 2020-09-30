@@ -12,8 +12,8 @@ output reg[7:0] out;
 
 always@(*)
     if (choice == 1) begin
-        out <= inMem;
+        out = inMem;
     end else begin
-        out <= inAc;
+        out = inAc;
     end
 endmodule

@@ -13,11 +13,13 @@ module EX(
     regVal,
     sinalExt,
     funct,
+    rdIn,
     clock,
     zeroOut,
     acOutValue,
     ulaJumpOut,
     rs,
+    rdOut,
     WRMem, WMMem, RMMem, NEQMem, JMem, JCMem
 );
 
@@ -26,11 +28,13 @@ input [7:0] PC;
 input [7:0] regVal;
 input [7:0] sinalExt;
 input [2:0] funct;
+input [1:0] rdIn;
 
 output wire zeroOut;
 output wire [7:0] acOutValue;
 output wire  [7:0] ulaJumpOut;
 output reg [7:0] rs;
+output reg [1:0] rdOut;
 output reg WRMem, WMMem, RMMem, NEQMem, JMem, JCMem;
 
 inout [2:0] sinal_ula;
@@ -101,6 +105,7 @@ ALUJump ALUJUMP( //Summation of PC and Jump addr
 
 always @(posedge clock)begin
     rs = regVal;
+    rdOut = rdIn;
     WRMem = WR; 
     WMMem = WM; 
     RMMem = RM; 

@@ -1,0 +1,34 @@
+`include "mrs.v"
+
+module WB(
+    WR,
+    RM,
+    ACOUT,
+    MEMOUT,
+    rd,
+    data,
+    WROut,
+    rdOut
+);
+
+    input WR, RM;
+    input [7:0] ACOUT;
+    input [7:0] MEMOUT;
+    input [1:0] rd;
+
+    output wire [7:0] data;
+    output WROut;
+    output [1:0] rdOut;
+
+    mrs MUX( //Mux Register Source
+        .inAc(ACOUT),
+        .inMem(MEMOUT),
+        .choice(RM),
+        .out(data)
+    );
+
+    always @(*)begin
+        WROut = WR;
+        rdOut = rdOut;
+    end
+endmodule
