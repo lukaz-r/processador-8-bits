@@ -103,7 +103,7 @@ ALUJump ALUJUMP( //Summation of PC and Jump addr
     .out(ulaJumpOut)
 );
 
-always @(posedge clock)begin
+always @(negedge clock)begin
     rs = regVal;
     rdOut = rdIn;
     WRMem = WR; 

@@ -104,4 +104,12 @@ module PROCESSADOR;
         .rdOut(rdOut)
     );
 
+    always begin
+        #5 clock = ~clock;
+    end
+
+    initial begin
+        clock = 1;
+    end
+
 endmodule

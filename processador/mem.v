@@ -24,15 +24,16 @@ module MEM(
     input [7:0]RegVal;
     input [7:0]acOutValue;
 
-    output [7:0] data_out;
-    output reg [7:0] jumpOut;
-    output [7:0] acOutWb;
     output reg [1:0]rdOut;
+    output reg [7:0] jumpOut;
     output reg Wr_MEM, Rm_MEM;
+
+    output [7:0] data_out;
+    output [7:0] acOutWb;
     output saidaA;
 
     always@(negedge clock) begin
-        rdOut = rdIn;
+        rdOut = rdIn[1:0];
         jumpOut = PC;
         Rm_MEM = Rm;
         Wr_MEM = Wr;
