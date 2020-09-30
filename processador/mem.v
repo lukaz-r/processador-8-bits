@@ -24,7 +24,8 @@ module mem(
     output reg Wr_MEM, Rm_MEM;
     output saidaA;
 
-    always@(posedge clock) begin
+//    always@(posedge clock) begin
+    always@(*) begin
         Rm_MEM=Rm;
         Wr_MEM=Wr;
         acOutValue_MEM=acOutValue;
