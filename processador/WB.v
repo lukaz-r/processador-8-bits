@@ -17,8 +17,8 @@ module WB(
     input [1:0] rd;
 
     output wire [7:0] data;
-    output WROut;
-    output [1:0] rdOut;
+    output reg WROut;
+    output reg [1:0] rdOut;
 
     mrs MUX( //Mux Register Source
         .inAc(ACOUT),

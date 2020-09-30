@@ -57,7 +57,7 @@ module ID(
     );
 
     always @(*) begin
-        rdOut = inst[4:3];
+        rd = inst[4:3];
         funct = inst[2:0];
         PCout = PC;
     end
