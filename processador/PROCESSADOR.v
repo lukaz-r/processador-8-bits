@@ -110,6 +110,9 @@ module PROCESSADOR;
 
     initial begin
         clock = 1;
+
+        #1000
+        $finish;
     end
 
 endmodule
