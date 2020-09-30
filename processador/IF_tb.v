@@ -1,45 +1,55 @@
 `timescale 1ns/1ns
-`include "processador/IF.v"
+`include "IF.v"
 
 module IF_tb;
- 
-    reg [7:0] PC_inst;
-    reg [7:0] novo_End;
-    reg [7:0] pcp_mux, pcj_mux; 
-    reg choice_mux; 
-    reg [7:0] in_PC;
+    reg[7:0] addrJump;
+    reg choice_mux;
 
-    output wire [2:0] OpCode;          
-    output wire [1:0] Rs_inst;                 
-    output wire [4:0] fourZero_Bits; 
-    output wire [7:0] end_Atual;
-    output wire [7:0] out_mux;
-    output wire [7:0] out_alu;
+    reg clock;
 
+    output wire[7:0] inst;
+    output wire[7:0] pc_calc;
 
-    IF exec(
-        PC_inst, // entrada mem de isnt
-        novo_End, // entrada end pc
-        pcp_mux, pcj_mux, choice_mux,
-        in_PC, //entrada da ula vinda de pc
-
-        OpCode, Rs_inst, fourZero_Bits, 
-        end_Atual,
-        out_mux,
-        out_alu,
+    IF IFMOD(
+        .clock(clock), 
+        .pcj_mux(addrJump), 
+        .choice_mux(choice_mux),
+        .inst(inst), 
+        .pc_calc(pc_calc)
     );
 
+    always begin
+        #5 clock = ~clock;
+    end
 
     initial begin
-        $dumpfile ("processador/IF_tb.vcd");    
-	    $dumpvars(0, IF_tb);
+        //$dumpfile ("processador/IF_tb.vcd");    
+	    //$dumpvars(0, IF_tb);
+        $monitor("addrJump = %d, MuxOpt = %b, Clock = %b\ninst = %d, PC_calc = %d",addrJump, choice_mux, clock, inst, pc_calc);
+        clock = 1;
+        addrJump = 8'b00011100;
+        choice_mux = 1'b0;
 
-        novo_End = 8'b00000010;
+        #10
+        addrJump = 8'b00001100;
+        choice_mux = 1'b0;
 
-        #10 
-        in_PC = novo_End;
+        #10
+        addrJump = 8'b00000001;
+        choice_mux = 1'b1;
 
+        #10
+        addrJump = 8'b00010000;
+        choice_mux = 1'b0;
+
+        #10
+        addrJump = 8'b11010100;
+        choice_mux = 1'b0;
+
+
+        #5
         $display("Test completed!");
+        $finish;
     end
 
 endmodule

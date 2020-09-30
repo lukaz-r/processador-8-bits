@@ -1,54 +1,49 @@
-`include "processador/ALUPC.v"
-`include "processador/memoryinstruction_.v"
-`include "processador/pc.v"
-`include "processador/mpc.v"
+`include "ALUPC.v"
+`include "memoryinstruction.v"
+`include "pc.v"
+`include "mpc.v"
 
 module IF(
-    PC_inst,
-    novo_End,
-    pcp_mux, pcj_mux, choice_mux,
-    in_PC,
-    OpCode, Rs_inst, fourZero_Bits, 
-    end_Atual,
-    out_mux,
-    out_alu,
+    clock, pcj_mux, choice_mux,
+    inst, pc_calc
 );
+    input clock;
 
-input [7:0] PC_inst;
-input [7:0] novo_End;
-input [7:0] pcp_mux, pcj_mux; 
-input choice_mux; 
-input [7:0] in_PC;
+    input [7:0] pcj_mux; 
+    input choice_mux; 
 
-output wire [2:0] OpCode;          
-output wire [1:0] Rs_inst;                 
-output wire [4:0] fourZero_Bits; 
-output wire [7:0] end_Atual;
-output wire [7:0] out_mux;
-output wire [7:0] out_alu;
+    inout [7:0] in_PC;
+    inout [7:0] out_alu;
+    inout [7:0] addr_atual;
 
-memoryinstruction_ INSTMEM(
-    .PCinst(PC_inst), 
-    .OPCode(OpCode), 
-    .Rs(Rs_inst), 
-    .Four_Zero_Bits(fourZero_Bits)
-);
+    output wire[7:0] inst;
+    output reg [7:0] pc_calc;
 
-pc PC(
-    .novoEnd(novo_End),
-    .endAtual(end_Atual)
-);
+    ALUPC SUMPC(
+        .inPC(addr_atual),
+        .out(out_alu)
+    );
 
-mpc MUX(
-    .pcp(pcp_mux),
-    .pcj(pcj_mux),
-    .choice(choice_mux),   
-    .out(out_mux)
-);
+    mpc MUX(
+        .pcp(out_alu),
+        .pcj(pcj_mux),
+        .choice(choice_mux),   
+        .out(in_PC)
+    );
 
-ALUPC ALU(
-    .inPC(in_PC),
-    .out(out_alu)
-);
+    pc POINTER(
+        .clock(clock),
+        .novoEnd(in_PC),
+        .endAtual(addr_atual)
+    );
 
+    memoryinstruction MEM(
+        .clock(clock),
+        .pccounter(addr_atual),
+        .saidaInstrucao(inst)
+    );
+
+    always @(*) begin
+        pc_calc = in_PC;      
+    end
 endmodule

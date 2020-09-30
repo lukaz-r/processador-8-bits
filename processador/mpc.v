@@ -10,11 +10,11 @@ module mpc( //Mux of PC source
     input choice;
     output reg[7:0] out;
 
-always@(*)
-    if (choice == 1) begin
-        out <= pcj;
-    end else begin
-        out <= pcp;
-    end
+    always@(*)
+        if (choice == 1) begin
+            out = pcj;
+        end else begin
+            out = pcp;
+        end
     
 endmodule
