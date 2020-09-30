@@ -27,7 +27,6 @@ output wire [7:0] end_Atual;
 output wire [7:0] out_mux;
 output wire [7:0] out_alu;
 
-
 memoryinstruction_ INSTMEM(
     .PCinst(PC_inst), 
     .OPCode(OpCode), 
