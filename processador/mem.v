@@ -5,7 +5,7 @@ module MEM(
     clock,
     Wr, Wm, Rm, Neq, J, JC,
     PC,
-    rdIn,
+    rdex,
     zeroOut,
     acOutValue,
     RegVal,
@@ -13,19 +13,19 @@ module MEM(
     jumpOut,
     acOutWb,
     saidaA,
-    rdOut,
+    rdmem,
     Wr_MEM, Rm_MEM,
 );
     input clock;
     input Wr, Wm, Rm, Neq, J, JC;
     input zeroOut;
     input [7:0]PC;
-    input [1:0]rdIn;
     input [7:0]RegVal;
     input [7:0]acOutValue;
+    input [1:0]rdex;
 
-    output reg [1:0]rdOut;
-    output reg [7:0] jumpOut;
+    output reg [1:0]rdmem;
+    output reg [7:0]jumpOut;
     output reg Wr_MEM, Rm_MEM;
 
     output [7:0] data_out;
@@ -33,7 +33,7 @@ module MEM(
     output saidaA;
 
     always@(negedge clock) begin
-        rdOut = rdIn[1:0];
+        rdmem = rdex;
         jumpOut = PC;
         Rm_MEM = Rm;
         Wr_MEM = Wr;

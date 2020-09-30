@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 `include "IF.v"
 `include "ID.v"
 `include "EX.v"
@@ -29,10 +31,11 @@ module PROCESSADOR;
     inout WRex, WMex, RMex, NEQex, Jex, JCex;
 
     //MEM/WB
+    inout [1:0] rdteste;
     inout [7:0] data_out;
     inout [7:0] jumpOut;
     inout [7:0] acOutWb;
-    inout [1:0] rdMEM;
+    //inout [1:0] rdMEM;
     inout WRmem, RMmem;
     inout saidaA;
 
@@ -40,6 +43,8 @@ module PROCESSADOR;
     inout [7:0] data;
     inout WRwb;
     inout [1:0] rdOut;
+
+    
 
 
     IF ONE(
@@ -81,7 +86,7 @@ module PROCESSADOR;
         .clock(clock),
         .Wr(WRex), .Wm(WMex), .Rm(RMex), .Neq(NEQex), .J(Jex), .JC(JCex),
         .PC(ulaJumpOut),
-        .rdIn(rdex),
+        .rdex(rdex),
         .zeroOut(zeroOut),
         .acOutValue(acOutValue),
         .RegVal(regVal),
@@ -89,7 +94,7 @@ module PROCESSADOR;
         .jumpOut(jumpOut),
         .acOutWb(acOutWb),
         .saidaA(saidaA),
-        .rdOut(rdMem),
+        .rdmem(rdteste),
         .Wr_MEM(WRmem), .Rm_MEM(RMmem)
     );
 
@@ -98,7 +103,7 @@ module PROCESSADOR;
         .RM(RMmem),
         .ACOUT(acOutWb),
         .MEMOUT(data_out),
-        .rd(rdMEM),
+        .rd(rdteste),
         .data(data),
         .WROut(WRwb),
         .rdOut(rdOut)
@@ -109,6 +114,8 @@ module PROCESSADOR;
     end
 
     initial begin
+        $dumpfile("PROCESSADOR.vcd");
+        $dumpvars(0,PROCESSADOR);
         clock = 1;
 
         #1000
