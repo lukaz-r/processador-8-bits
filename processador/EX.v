@@ -136,7 +136,7 @@ initial begin
     WRMem = 0; WMMem = 0; RMMem = 0; NEQMem = 0; JMem = 0; JCMem = 0;
 end
 
-always @(posedge clock)begin
+always @(*)begin
     rs = regVal;
 
     if (SIN == 1) begin

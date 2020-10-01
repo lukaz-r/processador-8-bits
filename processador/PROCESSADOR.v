@@ -11,41 +11,65 @@ module PROCESSADOR;
     reg clock;
 
     //IF/ID
-    inout [7:0] inst;
-    inout [7:0] pc_calc;
+    output [7:0] inst;
+    output [7:0] pc_calc;
 
     reg [7:0] instreg;
     reg [7:0] pc_calcreg;
 
     //ID/EX
-    inout [7:0] regVal;
-    inout [7:0] extsinal;
-    inout [1:0] rd;
-    inout Jid, JCid, INAid, RMid, WMid, SINid, SOUTid, WROutid, NEQid;
-    inout [2:0] funct;
-    inout [7:0] PCout;
+    output [7:0] regVal;
+    output [7:0] extsinal;
+    output [1:0] rd;
+    output Jid, JCid, INAid, RMid, WMid, SINid, SOUTid, WROutid, NEQid;
+    output [2:0] funct;
+    output [7:0] PCout;
+
+    reg [7:0] regValreg;
+    reg [7:0] extsinalreg;
+    reg [1:0] rdreg;
+    reg Jidreg, JCidreg, INAidreg, RMidreg, WMidreg, SINidreg, SOUTidreg, WROutidreg, NEQidreg;
+    reg [2:0] functreg;
+    reg [7:0] PCoutreg;
 
     //EX/MEM
-    inout zeroOut;
-    inout [7:0] acOutValue;
-    inout [7:0] ulaJumpOut;
-    inout [7:0] rs;
-    inout [1:0] rdex;
-    inout WRex, WMex, RMex, NEQex, Jex, JCex;
+    output zeroOut;
+    output [7:0] acOutValue;
+    output [7:0] ulaJumpOut;
+    output [7:0] rs;
+    output [1:0] rdex;
+    output WRex, WMex, RMex, NEQex, Jex, JCex;
+
+    reg zeroOutreg;
+    reg [7:0] acOutValuereg;
+    reg [7:0] ulaJumpOutreg;
+    reg [7:0] rsreg;
+    reg [1:0] rdexreg;
+    reg WRexreg, WMexreg, RMexreg, NEQexreg, Jexreg, JCexreg;
 
     //MEM/WB
-    inout [1:0] rdteste;
-    inout [7:0] data_out;
-    inout [7:0] jumpOut;
-    inout [7:0] acOutWb;
-    //inout [1:0] rdMEM;
-    inout WRmem, RMmem;
-    inout saidaA;
+    output [1:0] rdteste;
+    output [7:0] data_out;
+    output [7:0] jumpOut;
+    output [7:0] acOutWb;
+    output WRmem, RMmem;
+    output saidaA;
+
+    reg [1:0] rdtestereg;
+    reg [7:0] data_outreg;
+    reg [7:0] jumpOutreg;
+    reg [7:0] acOutWbreg;
+    reg WRmemreg, RMmemreg;
+    reg saidaAreg;
 
     //WB//IF
-    inout [7:0] data;
-    inout WRwb;
-    inout [1:0] rdOut;
+    output [7:0] data;
+    output WRwb;
+    output [1:0] rdOut;
+
+    reg [7:0] datareg;
+    reg WRwbreg;
+    reg [1:0] rdOutreg;
 
     //HAZARD CONTROLL
     reg [1:0] fwd;
@@ -57,11 +81,11 @@ module PROCESSADOR;
     );
 
     ID TWO(
-        .PC(pc_calc),
-        .inst(inst),
-        .data(data),
-        .rdIn(rdteste),
-        .WR(WRwb),
+        .PC(pc_calcreg),
+        .inst(instreg),
+        .data(datareg),
+        .rdIn(rdtestereg),
+        .WR(WRwbreg),
         .stall(stall),
         .clock(clock),
         .regVal(regVal),
@@ -73,14 +97,14 @@ module PROCESSADOR;
     );
 
     EX THREE(
-        .WR(WROutid), .SOUT(SOUTid), .WM(WMid), .RM(RMid), .NEQ(NEQid), .J(Jid), .JC(JCid), .SIN(SINid), .INA(INAid),
-        .PC(PCout),
-        .regVal(regVal),
-        .sinalExt(extsinal),
-        .funct(funct),
-        .rdIn(rd),
+        .WR(WROutidreg), .SOUT(SOUTidreg), .WM(WMidreg), .RM(RMidreg), .NEQ(NEQidreg), .J(Jidreg), .JC(JCidreg), .SIN(SINidreg), .INA(INAidreg),
+        .PC(PCoutreg),
+        .regVal(regValreg),
+        .sinalExt(extsinalreg),
+        .funct(functreg),
+        .rdIn(rdreg),
         .fwd(fwd),
-        .dataMem(data),
+        .dataMem(datareg),
         .clock(clock),
         .zeroOut(zeroOut),
         .acOutValue(acOutValue),
@@ -92,12 +116,12 @@ module PROCESSADOR;
 
     MEM FOUR(
         .clock(clock),
-        .Wr(WRex), .Wm(WMex), .Rm(RMex), .Neq(NEQex), .J(Jex), .JC(JCex),
-        .PC(ulaJumpOut),
-        .rdex(rdex),
-        .zeroOut(zeroOut),
-        .acOutValue(acOutValue),
-        .RegVal(rs),
+        .Wr(WRexreg), .Wm(WMexreg), .Rm(RMexreg), .Neq(NEQexreg), .J(Jexreg), .JC(JCexreg),
+        .PC(ulaJumpOutreg),
+        .rdex(rdexreg),
+        .zeroOut(zeroOutreg),
+        .acOutValue(acOutValuereg),
+        .RegVal(rsreg),
         .data_out(data_out),
         .jumpOut(jumpOut),
         .acOutWb(acOutWb),
@@ -107,11 +131,11 @@ module PROCESSADOR;
     );
 
     WB FIVE(
-        .WR(WRmem),
-        .RM(RMmem),
-        .ACOUT(acOutWb),
-        .MEMOUT(data_out),
-        .rd(rdteste),
+        .WR(WRmemreg),
+        .RM(RMmemreg),
+        .ACOUT(acOutWbreg),
+        .MEMOUT(data_outreg),
+        .rd(rdtestereg),
         .data(data),
         .WROut(WRwb),
         .rdOut(rdOut)
@@ -140,6 +164,50 @@ module PROCESSADOR;
             stall = 1;
         end
 
+    end
+
+    always @(negedge clock) begin
+        instreg = inst;
+        pc_calcreg = pc_calc;
+
+        regValreg = regVal;
+        extsinalreg = extsinal;
+        rdreg = rd;
+        Jidreg = Jid; 
+        JCidreg = JCid; 
+        INAidreg = INAid; 
+        RMidreg = RMid;
+        WMidreg = WMid;
+        SINidreg = SINid;
+        SOUTidreg = SOUTid;
+        WROutidreg = WROutid;
+        NEQidreg = NEQid;
+        functreg = funct;
+        PCoutreg = PCout;
+
+        zeroOutreg = zeroOut;
+        acOutValuereg = acOutValue;
+        ulaJumpOutreg = ulaJumpOut;
+        rsreg = rs;
+        rdexreg = rdex;
+        WRexreg = WRex;
+        WMexreg = WMex; 
+        RMexreg = RMex; 
+        NEQexreg = NEQex; 
+        Jexreg = Jex; 
+        JCexreg = JCex;
+
+        rdtestereg = rdteste;
+        data_outreg = data_out;
+        jumpOutreg = jumpOut;
+        acOutWbreg = acOutWb;
+        WRmemreg = WRmem;
+        RMmemreg = RMmem;
+        saidaAreg = saidaA;
+
+        datareg = data;
+        WRwbreg = WRwb;
+        rdOutreg = rdOut;
     end
 
     initial begin
@@ -172,7 +240,7 @@ module PROCESSADOR;
         //STALLS AND FWD
         //$monitor("FWD = %d, STALL = %b, CLOCK = %b, RMID = %b, RMEX = %b", fwd, stall, clock, RMid, RMex);
 
-        #195
+        #400
         $finish;
     end
 

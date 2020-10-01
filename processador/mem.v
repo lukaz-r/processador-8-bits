@@ -32,7 +32,7 @@ module MEM(
     output reg [7:0] acOutWb;
     output saidaA;
 
-    always@(negedge clock) begin
+    always@(*) begin
         acOutWb = acOutValue;
         rdmem = rdex;
         jumpOut = PC;
