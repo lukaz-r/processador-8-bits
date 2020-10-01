@@ -6,6 +6,7 @@
 `include "zero.v"
 `include "acOut.v"
 `include "ALUJump.v"
+`include "mfwd.v"
 
 module EX(
     WR, SOUT, WM, RM, NEQ, J, JC, SIN, INA,
@@ -14,6 +15,8 @@ module EX(
     sinalExt,
     funct,
     rdIn,
+    fwd,
+    dataMem,
     clock,
     zeroOut,
     acOutValue,
@@ -29,6 +32,8 @@ input [7:0] regVal;
 input [7:0] sinalExt;
 input [2:0] funct;
 input [1:0] rdIn;
+input [1:0] fwd;
+input [7:0] dataMem;
 
 output wire zeroOut;
 output wire [7:0] acOutValue;
@@ -42,6 +47,12 @@ inout twoandOne, escolhaMux, saidaAc, ulaZero;
 inout [7:0] saidaMux;
 inout [7:0] acInValue;
 inout [7:0] ulaOut;
+
+inout [7:0] muxacin;
+inout [7:0] muxulain;
+
+reg [1:0] choiceULA; 
+reg [1:0] choiceACIN;
 
 controleAlu ALUControl(
     .opAlu(funct),
@@ -66,15 +77,31 @@ mac MUX( //Mux of main ALU output accumulator data source
     .out(saidaMux)
 );
 
+mfwd ULASOURCE( //Mux of FWD
+    .base(regVal),
+    .acout(acOutValue),
+    .mem(dataMem),
+    .choice(choiceULA),
+    .out(muxulain)
+);
+
+mfwd ACINSOURCE( //Mux of FWD
+    .base(saidaMux),
+    .acout(acOutValue),
+    .mem(dataMem),
+    .choice(choiceACIN),
+    .out(muxacin)
+);
+
 acIn ACIN( //Main ALU input accumulator
-    .newData(saidaMux),
+    .newData(muxacin),
     .accept(saidaAc),
     .data(acInValue),
     .clock(clock)
 );
 
 ALU ALUMAIN( 
-    .entrada1(regVal),
+    .entrada1(muxulain),
     .entrada2(acInValue),
     .sinal_ula(sinal_ula),
     .clock(clock),
@@ -105,8 +132,21 @@ ALUJump ALUJUMP( //Summation of PC and Jump addr
     .out(ulaJumpOut)
 );
 
+initial begin
+    WRMem = 0; WMMem = 0; RMMem = 0; NEQMem = 0; JMem = 0; JCMem = 0;
+end
+
 always @(posedge clock)begin
     rs = regVal;
+
+    if (SIN == 1) begin
+        choiceACIN = fwd;
+        choiceULA = 2'b00;        
+    end else begin
+        choiceACIN = 2'b00;
+        choiceULA = fwd;
+    end
+
     rdOut = rdIn;
     WRMem = WR; 
     WMMem = WM; 

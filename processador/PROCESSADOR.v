@@ -44,11 +44,12 @@ module PROCESSADOR;
     inout WRwb;
     inout [1:0] rdOut;
 
-    
-
+    //HAZARD CONTROLL
+    reg [1:0] fwd;
+    reg stall;   
 
     IF ONE(
-        .clock(clock), .pcj_mux(jumpOut), .choice_mux(saidaA),
+        .clock(clock), .pcj_mux(jumpOut), .choice_mux(saidaA), .stall(stall),
         .inst(inst), .pc_calc(pc_calc)
     );
 
@@ -56,7 +57,9 @@ module PROCESSADOR;
         .PC(pc_calc),
         .inst(inst),
         .data(data),
+        .rdIn(rdteste),
         .WR(WRwb),
+        .stall(stall),
         .clock(clock),
         .regVal(regVal),
         .extsinal(extsinal),
@@ -73,6 +76,8 @@ module PROCESSADOR;
         .sinalExt(extsinal),
         .funct(funct),
         .rdIn(rd),
+        .fwd(fwd),
+        .dataMem(data),
         .clock(clock),
         .zeroOut(zeroOut),
         .acOutValue(acOutValue),
@@ -111,19 +116,42 @@ module PROCESSADOR;
 
     always begin
         #5 clock = ~clock;
+
+        //FWD UNIT
+        /*if (inst[4:3] == rdex) begin
+            fwd = 2'b01;
+        end else if (inst[4:3] == rdteste) begin
+            fwd = 2'b10;
+            
+        end else begin
+            fwd = 2'b00;
+        end*/
+
+        fwd = 2'b00;
+
+
+        // STALL UNIT
+        if (((inst[4:3] == rdex) & RMid) | ((inst[4:3] == rdteste) & RMex)) begin
+            stall = 0;
+        end else begin
+            stall = 1;
+        end
+
     end
 
     initial begin
         $dumpfile("PROCESSADOR.vcd");
         $dumpvars(0,PROCESSADOR);
         clock = 1;
+        stall = 1;
+        fwd = 2'b00;
 
         // IF OUTPUT
         //$monitor("PC = %d, INST = %d, CLOCK = %b", pc_calc, inst, clock);
         
         // ID OUTPUT
-        //$monitor("RegVal = %d, Sinal Estendido = %d, Rd = %d, Funct = %d, PCOut = %d, CLOCK = %b", regVal, extsinal, rd, funct, PCout, clock);
-        //$monitor("J = %b, JC = %b, INA = %b, RM = %b, WM = %b, SIN = %b, SOUT = %b, WR = %b, NEQ = %b, CLOCK = %b",Jid, JCid, INAid, RMid, WMid, SINid, SOUTid, WROutid, NEQid, clock);   
+        //$monitor("RegVal = %d, Sinal Estendido = %d, Rd = %d, Funct = %d, PCOut = %d, WR = %b, CLOCK = %b", regVal, extsinal, rd, funct, PCout, WRwb, clock);
+        //$monitor("J = %b, JC = %b, INA = %b, RM = %b, WM = %b, SIN = %b, SOUT = %b, WR = %b, NEQ = %b, CLOCK = %b, STALL = %b",Jid, JCid, INAid, RMid, WMid, SINid, SOUTid, WROutid, NEQid, clock, stall);   
 
 
         // EX OUTPUT 
@@ -138,7 +166,10 @@ module PROCESSADOR;
         // WB OUTPUT
         //$monitor("DadoMux = %d, WR = %b, rd = %d, CLOCK = %b", data, WRwb, rdOut, clock);
 
-        #95
+        //STALLS AND FWD
+        //$monitor("FWD = %d, STALL = %b, CLOCK = %b, RMID = %b, RMEX = %b", fwd, stall, clock, RMid, RMex);
+
+        #195
         $finish;
     end
 

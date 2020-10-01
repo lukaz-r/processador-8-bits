@@ -49,6 +49,7 @@ module MEM(
     );
 
     memorydata M_D(
+        .clock(clock),
         .Rm(Rm_MEM),
         .Wm(Wm),
         .address(acOutValue),

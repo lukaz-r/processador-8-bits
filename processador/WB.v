@@ -20,6 +20,10 @@ module WB(
     output reg WROut;
     output reg [1:0] rdOut;
 
+    initial begin
+        WROut = 0;
+    end
+
     mrs MUX( //Mux Register Source
         .inAc(ACOUT),
         .inMem(MEMOUT),

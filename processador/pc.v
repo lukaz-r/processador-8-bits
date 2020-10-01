@@ -1,5 +1,5 @@
 module pc (
-    input clock,
+    input clock, input stall,
     input wire[7:0] novoEnd,
     output reg[7:0] endAtual
 );
@@ -9,6 +9,8 @@ initial begin
 end
 
 always@(negedge clock)
-    endAtual = novoEnd;
+    if (stall == 1) begin
+        endAtual = novoEnd;    
+    end
 endmodule
 
