@@ -29,6 +29,6 @@ module WB(
 
     always @(*)begin
         WROut = WR;
-        rdOut = rdOut;
+        rdOut = rd;
     end
 endmodule

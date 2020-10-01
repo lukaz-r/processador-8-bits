@@ -127,10 +127,16 @@ module PROCESSADOR;
 
 
         // EX OUTPUT 
-        $monitor ("Zero = %b, AcOut = %d, ULA_JUMP = %d, rs = %d, rd = %d, CLOCK = %b", zeroOut, acOutValue, ulaJumpOut, rs, rdex, clock);
+        //$monitor ("Zero = %b, AcOut = %d, ULA_JUMP = %d, rs = %d, rd = %d, CLOCK = %b", zeroOut, acOutValue, ulaJumpOut, rs, rdex, clock);
         //$monitor ("WR = %b, WM = %b, RM = %b, NEQ = %b, J = %b, JC = %b, CLOCK = %b", WRex, WMex, RMex, NEQex, Jex, JCex, clock);
 
 
+        // MEM OUTPUT
+        //$monitor("rd = %d, MEMDATA = %d, JumpOut = %d, ACOUT = %d, WR = %b, RM = %b, JControl = %b, CLOCK = %b", rdteste, data_out, jumpOut, acOutWb, WRmem, RMmem, saidaA, clock);
+    
+
+        // WB OUTPUT
+        //$monitor("DadoMux = %d, WR = %b, rd = %d, CLOCK = %b", data, WRwb, rdOut, clock);
 
         #95
         $finish;

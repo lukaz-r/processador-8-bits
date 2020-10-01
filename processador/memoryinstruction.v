@@ -21,8 +21,8 @@ module memoryinstruction(
         armazenarinstrucoes[7] <= 8'b00100011; // MFI 3 
         armazenarinstrucoes[8] <= 8'b00010010; // SUM $0 
         armazenarinstrucoes[9] <= 8'b01011000; // MW $t1
-        /*armazenarinstrucoes[10] <= 8'b11011000;
-        armazenarinstrucoes[11] <= 8'b11011000;
+        armazenarinstrucoes[10] <= 8'b11011000;
+        /*armazenarinstrucoes[11] <= 8'b11011000;
         armazenarinstrucoes[12] <= 8'b11011000;
         armazenarinstrucoes[13] <= 8'b11011000;
         armazenarinstrucoes[14] <= 8'b11011000;

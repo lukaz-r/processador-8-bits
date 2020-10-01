@@ -29,10 +29,11 @@ module MEM(
     output reg Wr_MEM, Rm_MEM;
 
     output [7:0] data_out;
-    output [7:0] acOutWb;
+    output reg [7:0] acOutWb;
     output saidaA;
 
     always@(negedge clock) begin
+        acOutWb = acOutValue;
         rdmem = rdex;
         jumpOut = PC;
         Rm_MEM = Rm;
