@@ -14,6 +14,9 @@ module PROCESSADOR;
     inout [7:0] inst;
     inout [7:0] pc_calc;
 
+    reg [7:0] instreg;
+    reg [7:0] pc_calcreg;
+
     //ID/EX
     inout [7:0] regVal;
     inout [7:0] extsinal;
@@ -94,7 +97,7 @@ module PROCESSADOR;
         .rdex(rdex),
         .zeroOut(zeroOut),
         .acOutValue(acOutValue),
-        .RegVal(regVal),
+        .RegVal(rs),
         .data_out(data_out),
         .jumpOut(jumpOut),
         .acOutWb(acOutWb),
