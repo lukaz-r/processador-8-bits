@@ -85,6 +85,7 @@ ALU ALUMAIN(
 zero ZeroAc( //Zero reg output from the main ALU
     .newVal(ulaZero),
     .accept(SOUT),
+    .deny(saidaAc),
     .val(zeroOut),
     .clock(clock)
 );
@@ -92,6 +93,7 @@ zero ZeroAc( //Zero reg output from the main ALU
 acOut ACOUT( //Main ALU output accumulator
     .newData(ulaOut),
     .accept(SOUT),
+    .deny(saidaAc),
     .data(acOutValue),
     .clock(clock)
 );
@@ -103,7 +105,7 @@ ALUJump ALUJUMP( //Summation of PC and Jump addr
     .out(ulaJumpOut)
 );
 
-always @(negedge clock)begin
+always @(posedge clock)begin
     rs = regVal;
     rdOut = rdIn;
     WRMem = WR; 

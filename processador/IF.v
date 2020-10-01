@@ -20,6 +20,7 @@ module IF(
     output reg [7:0] pc_calc;
 
     ALUPC SUMPC(
+        .clock(clock),
         .inPC(addr_atual),
         .out(out_alu)
     );

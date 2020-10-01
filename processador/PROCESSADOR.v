@@ -118,7 +118,21 @@ module PROCESSADOR;
         $dumpvars(0,PROCESSADOR);
         clock = 1;
 
-        #1000
+        // IF OUTPUT
+        //$monitor("PC = %d, INST = %d, CLOCK = %b", pc_calc, inst, clock);
+        
+        // ID OUTPUT
+        //$monitor("RegVal = %d, Sinal Estendido = %d, Rd = %d, Funct = %d, PCOut = %d, CLOCK = %b", regVal, extsinal, rd, funct, PCout, clock);
+        //$monitor("J = %b, JC = %b, INA = %b, RM = %b, WM = %b, SIN = %b, SOUT = %b, WR = %b, NEQ = %b, CLOCK = %b",Jid, JCid, INAid, RMid, WMid, SINid, SOUTid, WROutid, NEQid, clock);   
+
+
+        // EX OUTPUT 
+        $monitor ("Zero = %b, AcOut = %d, ULA_JUMP = %d, rs = %d, rd = %d, CLOCK = %b", zeroOut, acOutValue, ulaJumpOut, rs, rdex, clock);
+        //$monitor ("WR = %b, WM = %b, RM = %b, NEQ = %b, J = %b, JC = %b, CLOCK = %b", WRex, WMex, RMex, NEQex, Jex, JCex, clock);
+
+
+
+        #95
         $finish;
     end
 

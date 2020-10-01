@@ -51,7 +51,7 @@ endfunction
 
 
 
-always @(negedge clock) 
+always @(*) 
     begin
         saida_ula = alu(entrada1, entrada2, sinal_ula);
         if (saida_ula == 0) begin

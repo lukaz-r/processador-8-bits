@@ -1,5 +1,6 @@
 
 module ALUPC( //Summation of PC and 1
+    clock,
     inPC,
     out
 );
@@ -7,6 +8,6 @@ module ALUPC( //Summation of PC and 1
     input[7:0] inPC;
     output reg[7:0] out;
 
-always@(*)
+always@(posedge clock)
     out = inPC + 1;
 endmodule
