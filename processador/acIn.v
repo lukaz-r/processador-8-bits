@@ -8,7 +8,7 @@ module acIn ( //Main ALU input accumulator
     input accept, clock;
     output reg[7:0] data;
 
-always @(posedge clock) begin
+always @(*) begin
     if (accept == 1'b1) begin
         data <= newData;
     end

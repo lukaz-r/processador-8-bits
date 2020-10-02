@@ -8,12 +8,15 @@ module memorydata (
     
     reg [7:0] mem[256:0];    // Memoria de 8 bits e x posições
 
-    always @(posedge clock)begin
-        if (Rm==1) begin
-            Data_out = mem[address];
-        end
-        else if (Wm==1) begin
+    always @(negedge clock) begin
+        if (Wm==1) begin
             mem[address] = RegVal;
         end
+    end
+    
+    always @(*)begin
+        if (Rm==1) begin
+            Data_out = mem[address];
+        end 
     end
 endmodule

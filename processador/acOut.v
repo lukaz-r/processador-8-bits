@@ -6,7 +6,7 @@ module acOut ( //Main ALU output accumulator
     input clock
 );
 
-always @(negedge clock)
+always @(*)
     begin
         if (accept == 1'b1 & deny == 1'b0)
             data <= newData;

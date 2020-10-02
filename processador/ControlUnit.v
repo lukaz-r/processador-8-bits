@@ -27,7 +27,7 @@ module controlUnit(
     end
 
 
-    always @(OPCode)
+    always @(*)
         case(OPCode)
 
             3'b000: // R

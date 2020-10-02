@@ -11,7 +11,7 @@ module PROCESSADOR;
     reg clock;
 
     //IF/ID
-    output [7:0] inst;
+    inout [7:0] inst;
     output [7:0] pc_calc;
 
     reg [7:0] instreg;
@@ -36,7 +36,7 @@ module PROCESSADOR;
     output zeroOut;
     output [7:0] acOutValue;
     output [7:0] ulaJumpOut;
-    output [7:0] rs;
+    inout [7:0] rs;
     output [1:0] rdex;
     output WRex, WMex, RMex, NEQex, Jex, JCex;
 
@@ -63,7 +63,7 @@ module PROCESSADOR;
     reg saidaAreg;
 
     //WB//IF
-    output [7:0] data;
+    inout [7:0] data;
     output WRwb;
     output [1:0] rdOut;
 
@@ -82,8 +82,8 @@ module PROCESSADOR;
 
     ID TWO(
         .PC(pc_calcreg),
-        .inst(instreg),
-        .data(datareg),
+        .inst(inst),
+        .data(data),
         .rdIn(rdtestereg),
         .WR(WRwbreg),
         .stall(stall),
@@ -121,7 +121,7 @@ module PROCESSADOR;
         .rdex(rdexreg),
         .zeroOut(zeroOutreg),
         .acOutValue(acOutValuereg),
-        .RegVal(rsreg),
+        .RegVal(rs),
         .data_out(data_out),
         .jumpOut(jumpOut),
         .acOutWb(acOutWb),
@@ -142,31 +142,7 @@ module PROCESSADOR;
     );
 
     always begin
-        #5 clock = ~clock;
-
-        //FWD UNIT
-        /*if (inst[4:3] == rdex) begin
-            fwd = 2'b01;
-        end else if (inst[4:3] == rdteste) begin
-            fwd = 2'b10;
-            
-        end else begin
-            fwd = 2'b00;
-        end*/
-
-        fwd = 2'b00;
-
-
-        // STALL UNIT
-        if (((inst[4:3] == rdex) & RMid) | ((inst[4:3] == rdteste) & RMex)) begin
-            stall = 0;
-        end else begin
-            stall = 1;
-        end
-
-    end
-
-    always @(negedge clock) begin
+        //#5
         instreg = inst;
         pc_calcreg = pc_calc;
 
@@ -208,6 +184,27 @@ module PROCESSADOR;
         datareg = data;
         WRwbreg = WRwb;
         rdOutreg = rdOut;
+
+        #5 clock = ~clock;   
+
+    end
+
+    always @(*) begin
+        if (inst[4:3] == rdex) begin
+            fwd = 2'b01;
+        end else if (inst[4:3] == rdteste) begin
+            fwd = 2'b10;
+            
+        end else begin
+            fwd = 2'b00;
+        end
+
+        fwd = 2'b00;
+        if (((inst[4:3] == rdexreg) & RMidreg) | ((inst[4:3] == rdtestereg) & RMexreg)) begin
+            stall = 0;
+        end else begin
+            stall = 1;
+        end   
     end
 
     initial begin
