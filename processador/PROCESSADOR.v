@@ -73,7 +73,7 @@ module PROCESSADOR;
 
     //HAZARD CONTROLL
     reg [1:0] fwd;
-    reg stall;   
+    reg stall, ex1, ex2;   
 
     IF ONE(
         .clock(clock), .pcj_mux(jumpOut), .choice_mux(saidaA), .stall(stall),
@@ -185,26 +185,36 @@ module PROCESSADOR;
         WRwbreg = WRwb;
         rdOutreg = rdOut;
 
-        #5 clock = ~clock;   
+        #5 clock = ~clock;
 
-    end
-
-    always @(*) begin
-        if (inst[4:3] == rdex) begin
+        if ((instreg[4:3] == rdexreg) & WRexreg) begin
             fwd = 2'b01;
-        end else if (inst[4:3] == rdteste) begin
-            fwd = 2'b10;
-            
+            ex1 = 1;
         end else begin
+            ex1 = 0;
+        end
+
+        if ((instreg[4:3] == rdtestereg) & WRmemreg) begin
+            fwd = 2'b10;
+            ex2 = 1;
+        end else begin
+            ex2 = 0;
+        end
+        
+        if (~(ex1 | ex2)) begin
             fwd = 2'b00;
         end
 
-        fwd = 2'b00;
-        if (((inst[4:3] == rdexreg) & RMidreg) | ((inst[4:3] == rdtestereg) & RMexreg)) begin
+        //fwd = 2'b00;
+
+        /*if (((inst[4:3] == rdteste) & RMidreg) | ((inst[4:3] == rdOut) & RMexreg)) begin
             stall = 0;
         end else begin
             stall = 1;
-        end   
+        end*/
+
+        stall = 1;   
+
     end
 
     initial begin
@@ -235,9 +245,9 @@ module PROCESSADOR;
         //$monitor("DadoMux = %d, WR = %b, rd = %d, CLOCK = %b", data, WRwb, rdOut, clock);
 
         //STALLS AND FWD
-        //$monitor("FWD = %d, STALL = %b, CLOCK = %b, RMID = %b, RMEX = %b", fwd, stall, clock, RMid, RMex);
+        //$monitor("FWD = %d, STALL = %b, CLOCK = %b", fwd, stall, clock);
 
-        #400
+        #450
         $finish;
     end
 

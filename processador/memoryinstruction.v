@@ -26,12 +26,15 @@ module memoryinstruction(
         armazenarinstrucoes[12] <= 8'b01010000; // MW $t0
         armazenarinstrucoes[13] <= 8'b01100000; // MR $s0
         armazenarinstrucoes[14] <= 8'b00100010; // MFI 2
-        armazenarinstrucoes[15] <= 8'b00011100; // SLT $t1
+        armazenarinstrucoes[15] <= 8'b00011001; // OR $t1
         armazenarinstrucoes[16] <= 8'b00011000; // MB $s1
         armazenarinstrucoes[17] <= 8'b00100110; // MFI 6
         armazenarinstrucoes[18] <= 8'b00011000; // AND $s1
         armazenarinstrucoes[19] <= 8'b11010000; // MB $t0
         armazenarinstrucoes[20] <= 8'b00000000; //
+        armazenarinstrucoes[21] <= 8'b00000000; //
+        armazenarinstrucoes[22] <= 8'b00000000; //
+        armazenarinstrucoes[23] <= 8'b00000000; //
 
     end
 

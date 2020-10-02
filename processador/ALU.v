@@ -36,9 +36,9 @@ function[7:0] alu;
         3'b100: // slt
         begin
             if(entrada1 < entrada2) begin
-                alu = 1;
+                alu = 8'b11111111;
             end else begin
-                alu = 0;
+                alu = 8'b00000000;
             end
         end
         
